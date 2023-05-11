@@ -82,11 +82,68 @@
 			
 		}
 	
+		
+		
+		var isValidId = false;
+	
 		$().ready(function(){
 			
+			$("[name='memberId']").blur(function(){ //아이디 초점을 잃었을 때 json 발생 
+				
+				
+				
+				
+				
+				$.ajax({
+					
+					url : "checkDuplicatedId",
+					type : "get",
+					data : {"memberId" : $("[name='memberId']").val()},
+					success : function(data){
+						
+						if(data == "isDuple"){
+							$("#msg").html("<span style='color:red;'>이미 가입된 아이디 입니다.</span>");
+							isValidId = false;
+							
+						}
+						else{
+							
+							$("#msg").html("<span style='color:green;'>가입 가능한 아이디 입니다.</span>");
+							isValidId = true;
+							
+							
+						}
+						
+						
+						
+						
+					}
+					
+					
+				});
+				
+				
+				
+				
+			});
+			
+
 			$("form").submit(function(){
 				var birthDt = $("#birthY").val() + "-" + $("#birthM").val() + "-" + $("#birthD").val();
 				$("[name='birthDt']").val(birthDt);
+				
+				
+				
+				if(isValidId == false){
+					alert("아이디를 확인해주세요.");
+					return false;
+				}
+				
+				if(isValidId == true){
+					alert("축하합니다!");
+					return true;
+				}
+	
 			});
 			
 		});
@@ -168,15 +225,16 @@
                             <div class="col-lg-12">
                                 <div class="checkout__form__input">
                                     <p>아이디 </p>
-                                    <input type="text" name="memberId" placeholder="아이디를 입력하세요.">
+                                    <input type="text" name="memberId" placeholder="아이디를 입력하세요." required="required" maxlength="12">
+                                    <span id="msg"></span>
                                 </div>
                                 <div class="checkout__form__input">
                                     <p>비밀번호 </p>
-                                    <input type="password" name="passwd" placeholder="비밀번호를 입력하세요.">
+                                    <input type="password" name="passwd" placeholder="비밀번호를 입력하세요." required="required">
                                 </div>
                                 <div class="checkout__form__input">
                                     <p>이름 </p>
-                                    <input type="text" name="memberNm" placeholder="이름을 입력하세요." >
+                                    <input type="text" name="memberNm" placeholder="이름을 입력하세요."  required="required">
                                 </div>
                                 <div>
                                     <p>성별 </p>
@@ -185,12 +243,12 @@
                                 </div><br>
                                 <div>
                                    <p>생년월일 </p>
-                                   <select id="birthY">
+                                   <select id="birthY" required="required">
 							        	<c:forEach var="i" begin="0" end="2023" >
 							        		<option>${2023 - i}</option>
 							        	</c:forEach>
 							        </select>년 
-						          	<select id="birthM">
+						          	<select id="birthM" required="required">
 							          	<c:forEach var="i" begin="1" end="12" >
 							          		<c:choose>
 							           		<c:when test="${i < 10 }">
@@ -202,7 +260,7 @@
 							          		</c:choose>
 							          	</c:forEach>
 							         </select>월
-							         <select id="birthD">
+							         <select id="birthD" required="required">
 							          	<c:forEach var="i" begin="1" end="31" >
 							          		<c:choose>
 							           		<c:when test="${i < 10 }">
@@ -218,7 +276,7 @@
                                 </div><br>
                                  <div class="checkout__form__input">
                                     <p>연락처 </p>
-                                    <input type="text" name="hp" placeholder="-를 포함해서 입력하세요." ><br>
+                                    <input type="text" name="hp" placeholder="-를 포함해서 입력하세요." required="required"  ><br>
                                 </div>
                                 <div class="checkout__form__checkbox">
                                     <label for="smsstsYn">
@@ -229,7 +287,7 @@
                                 </div>
                                  <div class="checkout__form__input">
                                     <p>이메일 </p>
-                                    <input type="text" name="email" placeholder="-를 포함해서 입력하세요." ><br>
+                                    <input type="text" name="email" placeholder="-를 포함해서 입력하세요." required="required" ><br>
                                 </div>
                                 <div class="checkout__form__checkbox">
                                     <label for="emailstsYn">
@@ -240,7 +298,7 @@
                                 </div>
                                 <br>
                                  <div class="checkout__form__input">
-	                                우편번호 : <input type="text" id="zipcode" name="zipcode" style="width: 20%;">
+	                                우편번호 : <input type="text" id="zipcode" name="zipcode" style="width: 20%;" required="required">
 									<input type="button" value="검색" onclick="execDaumPostcode();"style="width: 10%; padding-left: 0"><br>
 									도로명 주소 <input type="text" id="roadAddress" name="roadAddress" placeholder="도로명주소를 입력하세요."><br>
 									지번 주소 <input type="text" id="jibunAddress" name="jibunAddress" placeholder="지번주소를 입력하세요."><br>
