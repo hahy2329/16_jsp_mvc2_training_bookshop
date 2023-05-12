@@ -235,7 +235,7 @@
                                 </div>
                                 <div class="checkout__form__input">
                                     <p>비밀번호 </p>
-                                    <input type="password" name="passwd" placeholder="비밀번호를 입력하세요." required="required">
+                                    <input type="password" name="passwd" placeholder="비밀번호를 입력하세요." required="required" maxlength="15">
                                 </div>
                                 <div class="checkout__form__input">
                                     <p>이름 </p>

@@ -396,6 +396,21 @@
                 </div>
             </div>
         </div>
+        
+     <div align="center"> 	 
+		<select id ="sort">
+			<option>all</option>
+			<option>new</option>
+			<option>best</option>
+			<option>steady</option>
+		
+		</select>
+		<input type="text" id="searchWord" name="searchWord">
+		<input type="button" value="검색" name="search">
+	</div>	
+        
+        
+        
     </section>
     <!-- Shop Section End -->
 
