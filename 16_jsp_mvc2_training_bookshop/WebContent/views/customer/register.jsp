@@ -90,8 +90,13 @@
 			
 			$("[name='memberId']").blur(function(){ //아이디 초점을 잃었을 때 json 발생 
 				
-				
-				
+				if ($("#memberId").val() == "") {
+
+					alert("이름을 정확히 입력해주세요");
+
+					return;
+
+				}
 				
 				
 				$.ajax({
@@ -225,7 +230,7 @@
                             <div class="col-lg-12">
                                 <div class="checkout__form__input">
                                     <p>아이디 </p>
-                                    <input type="text" name="memberId" placeholder="아이디를 입력하세요." required="required" maxlength="12">
+                                    <input type="text" name="memberId" id="memberId" placeholder="아이디를 입력하세요." required="required" maxlength="12">
                                     <span id="msg"></span>
                                 </div>
                                 <div class="checkout__form__input">
