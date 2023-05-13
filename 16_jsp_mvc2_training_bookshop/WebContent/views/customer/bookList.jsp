@@ -404,6 +404,7 @@
 				<option value="writer">writer</option>
 				<option value="part">part</option>
 			
+			
 			</select>
 			<input type="text" id="searchWord" name="searchWord">
 			<input type="submit" value="검색">

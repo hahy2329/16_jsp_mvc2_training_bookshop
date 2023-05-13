@@ -219,10 +219,12 @@ public class BookDAO {
 					sql +="WHERE BOOK_NM LIKE CONCAT('%', ?, '%')";
 					sql +="OR WRITER LIKE CONCAT('%', ?, '%')";
 					sql +="OR PART LIKE CONCAT('%', ?, '%')";
+					
 					pstmt = conn.prepareStatement(sql);
 					pstmt.setString(1, searchWord);
 					pstmt.setString(2, searchWord);
 					pstmt.setString(3, searchWord);
+					
 					
 					
 				}
