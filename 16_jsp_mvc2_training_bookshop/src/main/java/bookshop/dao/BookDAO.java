@@ -193,4 +193,84 @@ public class BookDAO {
 		return bookList;
 		
 	}
+	
+	
+	public ArrayList<BookDTO> getBookList(String sort, String searchWord){
+		
+		ArrayList<BookDTO> bookList = new ArrayList<BookDTO>();
+		
+		try {
+			
+			getConnection();
+			
+			String sql = "";
+			
+			if(sort.equals("all")) {
+				if(searchWord.equals("")) {
+					
+					sql = "SELECT * FROM BOOK";
+					pstmt = conn.prepareStatement(sql);
+					
+					
+				}
+				
+				else {
+					sql = "SELECT * FROM BOOK";
+					sql +="WHERE BOOK_NM LIKE CONCAT('%', ?, '%')";
+					sql +="OR WRITER LIKE CONCAT('%', ?, '%')";
+					sql +="OR PART LIKE CONCAT('%', ?, '%')";
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1, searchWord);
+					pstmt.setString(2, searchWord);
+					pstmt.setString(3, searchWord);
+					
+					
+				}
+			}
+			
+			else {
+				sql = "SELECT * FROM BOOK WHERE "+ sort +" LIKE CONCAT('%', ? ,'%')";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, searchWord);
+			}
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				BookDTO bookDTO = new BookDTO();
+				bookDTO.setBookCd(rs.getInt("BOOK_CD"));
+				bookDTO.setBookNm(rs.getString("BOOK_NM"));
+				bookDTO.setWriter(rs.getString("WRITER"));
+				bookDTO.setPrice(rs.getInt("PRICE"));
+				bookDTO.setDiscountRt(rs.getInt("DISCOUNT_RT"));
+				bookDTO.setStock(rs.getInt("STOCK"));
+				bookDTO.setPublisher(rs.getString("PUBLISHER"));
+				bookDTO.setSort(rs.getString("SORT"));
+				bookDTO.setPoint(rs.getInt("POINT"));
+				bookDTO.setPublishedDt(rs.getDate("PUBLISHED_DT"));
+				bookDTO.setTotalPage(rs.getInt("TOTAL_PAGE"));
+				bookDTO.setIsbn(rs.getString("ISBN"));
+				bookDTO.setDeliveryPrice(rs.getInt("DELIVERY_PRICE"));
+				bookDTO.setPart(rs.getString("PART"));
+				bookDTO.setWriterIntro(rs.getString("WRITER_INTRO"));
+				bookDTO.setPublisherComment(rs.getString("PUBLISHER_COMMENT"));
+				bookDTO.setIntro(rs.getString("INTRO"));
+				bookDTO.setPublisherComment(rs.getString("PUBLISHER_COMMENT"));
+				bookDTO.setRecommendation(rs.getString("RECOMMENDATION"));
+				bookDTO.setImgNm(rs.getString("IMG_NM"));
+				bookDTO.setEnrollDt(rs.getDate("ENROLL_DT"));
+				bookList.add(bookDTO);
+			}
+			
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			getClose();
+		}
+		
+		return bookList;
+	}
+	
+	
 }

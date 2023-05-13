@@ -396,18 +396,20 @@
                 </div>
             </div>
         </div>
-        
-     <div align="center"> 	 
-		<select id ="sort">
-			<option>all</option>
-			<option>new</option>
-			<option>best</option>
-			<option>steady</option>
-		
-		</select>
-		<input type="text" id="searchWord" name="searchWord">
-		<input type="button" value="검색" name="search">
-	</div>	
+    <form action="searchWord" method="get">  
+	     <div align="center"> 	 
+			<select id ="sort" name="sort">
+				<option value="all">all</option>
+				<option value="book_Nm">bookNm</option>
+				<option value="writer">writer</option>
+				<option value="part">part</option>
+			
+			</select>
+			<input type="text" id="searchWord" name="searchWord">
+			<input type="submit" value="검색">
+		</div>	
+	</form>
+	
         
         
         
