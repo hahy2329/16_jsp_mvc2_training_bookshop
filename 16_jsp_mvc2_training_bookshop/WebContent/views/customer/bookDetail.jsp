@@ -41,6 +41,16 @@
 			
 		}
 	    
+	    function cartBook(bookCd){
+	    	if("${sessionScope.memberId == null}" == "true"){
+	    		alert("로그인을 먼저 진행해주세요.");
+	    		location.href="login";
+	    	}
+	    	else{
+	    		location.href="MyCartList?bookCd=${bookDTO.bookCd}"
+	    	}
+	    }
+	    
 	    function modifyMember() {
 			
 	    	if ("${sessionScope.memberId == null}" == "true") {
@@ -178,7 +188,8 @@
                                     <input type="text" name="orderBookQty" value="1">
                                 </div>
                             </div>
-                            <a href="javascript:orderBook();" class="cart-btn"><span class="icon_bag_alt"></span> 주문하기</a>
+                            <a href="javascript:orderBook();" class="cart-btn"><span class="icon_bag_alt"></span> 주문하기</a> &nbsp;
+                            <a href="javascript:cartBook();" class="cart-btn"><span class="icon_bag_alt"></span>장바구니 담기</a>
                         </div>
                         <div class="product__details__widget">
                             <ul>
