@@ -47,7 +47,7 @@
 	    		location.href="login";
 	    	}
 	    	else{
-	    		location.href="MyCartList?bookCd=${bookDTO.bookCd}";
+	    		location.href="MyCartList?bookCd=${bookDTO.bookCd}&orderBookQty=" $("[name='orderBookQty']").val();
 	    	}
 	    }
 	    
